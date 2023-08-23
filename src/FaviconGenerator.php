@@ -23,7 +23,8 @@ class FaviconGenerator
 
     public function generateFaviconsFromImagePath() {
         // create an image manager instance with imagick driver
-        Image::configure(['driver' => 'imagick']);
+        // Image::configure(['driver' => 'imagick']);
+        Image::configure(['driver' => 'gd']);
 
         Image::make($this->filePath)->resize(192, 192)->save($this->distPath . "/android-chrome-192x192.png", '100', 'png');
         Image::make($this->filePath)->resize(512, 512)->save($this->distPath . "/android-chrome-512x512.png", '100', 'png');
@@ -33,11 +34,12 @@ class FaviconGenerator
         Image::make($this->filePath)->resize(150, 150)->save($this->distPath . "/mstile-150x150.png", '100', 'png');
 
         // favicon.ico
-        $icon = new \Imagick();
-        $icon->addImage(new \Imagick($this->distPath . "/favicon-16x16.png"));
-        $icon->addImage(new \Imagick($this->distPath . "/favicon-32x32.png"));
-        $icon->setResolution(16,16);
-        $icon->writeImages($this->distPath . "/favicon.ico", true);
+        // $icon = new \Imagick();
+        // $icon->addImage(new \Imagick($this->distPath . "/favicon-16x16.png"));
+        // $icon->addImage(new \Imagick($this->distPath . "/favicon-32x32.png"));
+        // $icon->setResolution(16,16);
+        // $icon->writeImages($this->distPath . "/favicon.ico", true);
+        Image::make($this->filePath)->resize(16, 16)->save($this->distPath . "/favicon.ico", '100', 'png');
 
         $this->saveBrowserConfigXml();
         $this->saveSiteWebManifest();
@@ -93,7 +95,7 @@ class FaviconGenerator
      * @param String $publicPath
      * @return string
      */
-    public static function generateHtmlMetaIcons(String $publicPath = 'favicon'): string
+    public static function generateHtmlMetaIcons(String $publicPath = '/favicon'): string
     {
         $html = '
             <link rel="apple-touch-icon" sizes="180x180" href=" ' . $publicPath . '/apple-touch-icon.png">
