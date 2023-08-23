@@ -93,20 +93,28 @@ class FaviconGenerator
 
     /**
      * @param String $publicPath
-     * @return string
+     * @return Array
      */
-    public static function generateHtmlMetaIcons(String $publicPath = '/favicon'): string
+    public static function generateHtmlMetaIcons(String $publicPath = '/favicon'): Array
     {
-        $html = '
-            <link rel="apple-touch-icon" sizes="180x180" href=" ' . $publicPath . '/apple-touch-icon.png">
-            <link rel="icon" type="image/png" sizes="32x32" href=" ' . $publicPath . '/favicon-32x32.png">
-            <link rel="icon" type="image/png" sizes="16x16" href=" ' . $publicPath . '/favicon-16x16.png">
-            <link rel="manifest" href=" ' . $publicPath . '/site.webmanifest">
-            <link rel="mask-icon" href=" ' . $publicPath . '/safari-pinned-tab.svg" color="#5bbad5">
-            <meta name="msapplication-TileColor" content="#da532c">
-            <meta name="theme-color" content="#ffffff">';
+        // $html = '
+        //     <link rel="apple-touch-icon" sizes="180x180" href=" ' . $publicPath . '/apple-touch-icon.png">
+        //     <link rel="icon" type="image/png" sizes="32x32" href=" ' . $publicPath . '/favicon-32x32.png">
+        //     <link rel="icon" type="image/png" sizes="16x16" href=" ' . $publicPath . '/favicon-16x16.png">
+        //     <link rel="manifest" href=" ' . $publicPath . '/site.webmanifest">
+        //     <link rel="mask-icon" href=" ' . $publicPath . '/safari-pinned-tab.svg" color="#5bbad5">
+        //     <meta name="msapplication-TileColor" content="#da532c">
+        //     <meta name="theme-color" content="#ffffff">';
 
-        return $html;
+        $favicon_data = [
+            'apple_touch_icon' => "$publicPath/apple-touch-icon.png",
+            'icon_32' => "$publicPath/favicon-32x32.png",
+            'icon_16' => "$publicPath/favicon-31x31.png",
+            'manifest' => "$publicPath/site.webmanifest",
+            'mask_icon' => "$publicPath/safari-pinned-tab.svg",
+        ];
+
+        return $favicon_data;
     }
 
 }
